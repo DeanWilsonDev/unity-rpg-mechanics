@@ -178,105 +178,98 @@ namespace Characters.Statistics
 
         public static CharacterStatistics GetBaseStatisticsForCharacterType(CharacterType type)
         {
-
-            switch (type)
+            return type switch
             {
-                case CharacterType.MeleeDamage:
-                    return new CharacterStatistics
-                    {
-                        Level = 1,
-                        Vitality = 100,
-                        CurrentHealth = 100,
-                        Endurance = 50,
-                        CurrentStamina = 50,
-                        CarryWeight = 250,
-                        Strength = 8,
-                        Dexterity = 4,
-                        Constitution = 6,
-                        Intelligence = 3,
-                        Wisdom = 1,
-                        Charisma = 3,
-                    };
-                case CharacterType.RangedDamage:
-                    return new CharacterStatistics
-                    {
-                        Level = 1,
-                        Vitality = 100,
-                        CurrentHealth = 100,
-                        Endurance = 50,
-                        CurrentStamina = 50,
-                        CarryWeight = 250,
-                        Strength = 4,
-                        Dexterity = 8,
-                        Constitution = 3,
-                        Intelligence = 5,
-                        Wisdom = 1,
-                        Charisma = 4,
-                    };
-                case CharacterType.FastAttacker:
-                    return new CharacterStatistics
-                    {
-                        Level = 1,
-                        Vitality = 100,
-                        CurrentHealth = 100,
-                        Endurance = 50,
-                        CurrentStamina = 50,
-                        CarryWeight = 250,
-                        Strength = 6,
-                        Dexterity = 6,
-                        Constitution = 3,
-                        Intelligence = 4,
-                        Wisdom = 1,
-                        Charisma = 5,
-                    };
-                case CharacterType.Healer:
-                    return new CharacterStatistics
-                    {
-                        Level = 1,
-                        Vitality = 100,
-                        CurrentHealth = 100,
-                        Endurance = 50,
-                        CurrentStamina = 50,
-                        CarryWeight = 250,
-                        Strength = 2,
-                        Dexterity = 2,
-                        Constitution = 2,
-                        Intelligence = 5,
-                        Wisdom = 8,
-                        Charisma = 6,
-                    };
-                case CharacterType.Tank:
-                    return new CharacterStatistics
-                    {
-                        Vitality = 100,
-                        CurrentHealth = 100,
-                        Endurance = 50,
-                        CurrentStamina = 50,
-                        CarryWeight = 250,
-                        Strength = 6,
-                        Dexterity = 3,
-                        Constitution = 8,
-                        Intelligence = 3,
-                        Wisdom = 1,
-                        Charisma = 4,
-                    };
-                default:
-                    return new CharacterStatistics
-                    {
-                        Level = 1,
-                        Vitality = 100,
-                        CurrentHealth = 100,
-                        Endurance = 50,
-                        CurrentStamina = 50,
-                        CarryWeight = 250,
-                        Strength = 1,
-                        Dexterity = 1,
-                        Constitution = 1,
-                        Intelligence = 1,
-                        Wisdom = 1,
-                        Charisma = 1,
-                    };
-            }
+                CharacterType.MeleeDamage => new CharacterStatistics
+                {
+                    Level = 1,
+                    Vitality = 100,
+                    CurrentHealth = 100,
+                    Endurance = 50,
+                    CurrentStamina = 50,
+                    CarryWeight = 250,
+                    Strength = 8,
+                    Dexterity = 4,
+                    Constitution = 6,
+                    Intelligence = 3,
+                    Wisdom = 1,
+                    Charisma = 3,
+                },
+                CharacterType.RangedDamage => new CharacterStatistics
+                {
+                    Level = 1,
+                    Vitality = 100,
+                    CurrentHealth = 100,
+                    Endurance = 50,
+                    CurrentStamina = 50,
+                    CarryWeight = 250,
+                    Strength = 4,
+                    Dexterity = 8,
+                    Constitution = 3,
+                    Intelligence = 5,
+                    Wisdom = 1,
+                    Charisma = 4,
+                },
+                CharacterType.FastAttacker => new CharacterStatistics
+                {
+                    Level = 1,
+                    Vitality = 100,
+                    CurrentHealth = 100,
+                    Endurance = 50,
+                    CurrentStamina = 50,
+                    CarryWeight = 250,
+                    Strength = 6,
+                    Dexterity = 6,
+                    Constitution = 3,
+                    Intelligence = 4,
+                    Wisdom = 1,
+                    Charisma = 5,
+                },
+                CharacterType.Healer => new CharacterStatistics
+                {
+                    Level = 1,
+                    Vitality = 100,
+                    CurrentHealth = 100,
+                    Endurance = 50,
+                    CurrentStamina = 50,
+                    CarryWeight = 250,
+                    Strength = 2,
+                    Dexterity = 2,
+                    Constitution = 2,
+                    Intelligence = 5,
+                    Wisdom = 8,
+                    Charisma = 6,
+                },
+                CharacterType.Tank => new CharacterStatistics
+                {
+                    Vitality = 100,
+                    CurrentHealth = 100,
+                    Endurance = 50,
+                    CurrentStamina = 50,
+                    CarryWeight = 250,
+                    Strength = 6,
+                    Dexterity = 3,
+                    Constitution = 8,
+                    Intelligence = 3,
+                    Wisdom = 1,
+                    Charisma = 4,
+                },
+                _ => new CharacterStatistics
+                {
+                    Level = 1,
+                    Vitality = 100,
+                    CurrentHealth = 100,
+                    Endurance = 50,
+                    CurrentStamina = 50,
+                    CarryWeight = 250,
+                    Strength = 1,
+                    Dexterity = 1,
+                    Constitution = 1,
+                    Intelligence = 1,
+                    Wisdom = 1,
+                    Charisma = 1,
+                }
+            };
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Characters
         [SerializeField] public string characterName;
         [SerializeField] public CharacterType characterType;
 
-        private void Start()
+        protected virtual void Start()
         {
             statistics = StatisticGenerator.GetStatisticsForLevel(1, characterType);
         }

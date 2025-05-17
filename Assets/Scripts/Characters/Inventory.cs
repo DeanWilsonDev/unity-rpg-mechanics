@@ -1,17 +1,38 @@
 using System.Collections.Generic;
-using Characters;
 using Items;
 
 namespace Characters 
 {
-    public class Inventory
+    public abstract class Inventory
     {
-        public List<Item> Items = new List<Item>();
+        protected List<Item> Items = new List<Item>();
 
-        public void UseItem(Consumable consumableItem, Character character)
+        /// <summary>
+        /// Helper method to get all items in the inventory.
+        /// </summary>
+        /// <returns></returns>
+        public List<Item> GetItems()
         {
-            consumableItem.OnConsume(character.statistics);
-            Items.Remove(consumableItem);
+            return Items;
         }
+
+        /// <summary>
+        /// Helper method to add an item to the inventory.
+        /// </summary>
+        /// <param name="item"></param>
+        public void AddItemToInventory(Item item)
+        {
+            Items.Add(item);
+        }
+        
+        /// <summary>
+        /// Helper method to remove an item from the inventory.
+        /// </summary>
+        /// <param name="item"></param>
+        public void RemoveItemFromInventory(Item item)
+        {
+            Items.Remove(item);
+        }
+        
     }
 }
