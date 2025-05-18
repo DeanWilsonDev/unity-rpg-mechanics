@@ -15,7 +15,7 @@ namespace Characters.Statistics
         [SerializeField] private float currentHealth;
         [SerializeField] private float endurance;
         [SerializeField] private float currentStamina;
-        
+
         [SerializeField] private int carryWeight;
 
         [SerializeField] private int strength;
@@ -24,6 +24,14 @@ namespace Characters.Statistics
         [SerializeField] private int intelligence;
         [SerializeField] private int wisdom;
         [SerializeField] private int charisma;
+
+
+        private const float BaseVitality = 100;
+        private const float VitalityScaleThreshold = 5;
+        private const float BaseEndurance = 50;
+        private const float EnduranceScaleThreshold = 8;
+        private const int BaseCarryWeight = 250;
+        private const float CarryWeightScaleThreshold = 20;
 
 
         /// <summary>
@@ -56,7 +64,7 @@ namespace Characters.Statistics
         /// <summary>
         /// The required amount of experience to reach the next level.
         /// </summary>
-        public int ExperienceToNextLevel 
+        public int ExperienceToNextLevel
         {
             get => experienceToNextLevel;
             set => experienceToNextLevel = value;
@@ -69,7 +77,7 @@ namespace Characters.Statistics
         public float Vitality
         {
             get => vitality;
-            set => vitality = value * constitution * 0.1f;
+            set => vitality = BaseVitality * (1 + Mathf.Pow((value / VitalityScaleThreshold), 2));
         }
 
         /// <summary>
@@ -89,7 +97,7 @@ namespace Characters.Statistics
         public float Endurance
         {
             get => endurance;
-            set => endurance = value + dexterity * 0.1f;
+            set => endurance = BaseEndurance * (1 + Mathf.Pow((value / EnduranceScaleThreshold), 2));
         }
 
         /// <summary>
@@ -102,14 +110,19 @@ namespace Characters.Statistics
             set => currentStamina = value;
         }
 
+        /// <summary>
+        /// Item Storage Capacity
+        /// The amount of weight a character can carry.
+        /// Scales based on Strength.
+        /// </summary>
         public int CarryWeight
         {
-            
             get => carryWeight;
-            set => carryWeight = value + strength;
+            set => carryWeight =
+                Mathf.RoundToInt(BaseCarryWeight * (1 + Mathf.Pow((value / CarryWeightScaleThreshold), 2)));
         }
 
-        
+
         /// <summary>
         /// Melee Damage
         /// The amount of damage a character can deal with melee attacks.
@@ -120,7 +133,7 @@ namespace Characters.Statistics
             get => strength;
             set => strength = value;
         }
-        
+
         /// <summary>
         /// Ranged Damage
         /// The amount of damage a character can deal with ranged attacks.
@@ -151,19 +164,19 @@ namespace Characters.Statistics
             get => intelligence;
             set => intelligence = value;
         }
-        
+
         /// <summary>
         /// Willpower and Perception
         /// Wisdom adds modifiers for skills and abilities.
         /// This also affects the amount of health a healer can restore.
         /// </summary>
-        public int Wisdom 
+        public int Wisdom
         {
             get => wisdom;
             set => wisdom = value;
         }
-        
-        
+
+
         /// <summary>
         /// Persuasion and Critical Chance
         /// Charisma adds modifiers for Critical Hits
@@ -183,11 +196,11 @@ namespace Characters.Statistics
                 CharacterType.MeleeDamage => new CharacterStatistics
                 {
                     Level = 1,
-                    Vitality = 100,
-                    CurrentHealth = 100,
-                    Endurance = 50,
-                    CurrentStamina = 50,
-                    CarryWeight = 250,
+                    Vitality = BaseVitality,
+                    CurrentHealth = BaseVitality,
+                    Endurance = BaseEndurance,
+                    CurrentStamina = BaseEndurance,
+                    CarryWeight = BaseCarryWeight,
                     Strength = 8,
                     Dexterity = 4,
                     Constitution = 6,
@@ -198,11 +211,11 @@ namespace Characters.Statistics
                 CharacterType.RangedDamage => new CharacterStatistics
                 {
                     Level = 1,
-                    Vitality = 100,
-                    CurrentHealth = 100,
-                    Endurance = 50,
-                    CurrentStamina = 50,
-                    CarryWeight = 250,
+                    Vitality = BaseVitality,
+                    CurrentHealth = BaseVitality,
+                    Endurance = BaseEndurance,
+                    CurrentStamina = BaseEndurance,
+                    CarryWeight = BaseCarryWeight,
                     Strength = 4,
                     Dexterity = 8,
                     Constitution = 3,
@@ -213,11 +226,11 @@ namespace Characters.Statistics
                 CharacterType.FastAttacker => new CharacterStatistics
                 {
                     Level = 1,
-                    Vitality = 100,
-                    CurrentHealth = 100,
-                    Endurance = 50,
-                    CurrentStamina = 50,
-                    CarryWeight = 250,
+                    Vitality = BaseVitality,
+                    CurrentHealth = BaseVitality,
+                    Endurance = BaseEndurance,
+                    CurrentStamina = BaseEndurance,
+                    CarryWeight = BaseCarryWeight,
                     Strength = 6,
                     Dexterity = 6,
                     Constitution = 3,
@@ -228,11 +241,11 @@ namespace Characters.Statistics
                 CharacterType.Healer => new CharacterStatistics
                 {
                     Level = 1,
-                    Vitality = 100,
-                    CurrentHealth = 100,
-                    Endurance = 50,
-                    CurrentStamina = 50,
-                    CarryWeight = 250,
+                    Vitality = BaseVitality,
+                    CurrentHealth = BaseVitality,
+                    Endurance = BaseEndurance,
+                    CurrentStamina = BaseEndurance,
+                    CarryWeight = BaseCarryWeight,
                     Strength = 2,
                     Dexterity = 2,
                     Constitution = 2,
@@ -242,11 +255,12 @@ namespace Characters.Statistics
                 },
                 CharacterType.Tank => new CharacterStatistics
                 {
-                    Vitality = 100,
-                    CurrentHealth = 100,
-                    Endurance = 50,
-                    CurrentStamina = 50,
-                    CarryWeight = 250,
+                    level = 1,
+                    Vitality = BaseVitality,
+                    CurrentHealth = BaseVitality,
+                    Endurance = BaseEndurance,
+                    CurrentStamina = BaseEndurance,
+                    CarryWeight = BaseCarryWeight,
                     Strength = 6,
                     Dexterity = 3,
                     Constitution = 8,
@@ -257,11 +271,11 @@ namespace Characters.Statistics
                 _ => new CharacterStatistics
                 {
                     Level = 1,
-                    Vitality = 100,
-                    CurrentHealth = 100,
-                    Endurance = 50,
-                    CurrentStamina = 50,
-                    CarryWeight = 250,
+                    Vitality = BaseVitality,
+                    CurrentHealth = BaseVitality,
+                    Endurance = BaseEndurance,
+                    CurrentStamina = BaseEndurance,
+                    CarryWeight = BaseCarryWeight,
                     Strength = 1,
                     Dexterity = 1,
                     Constitution = 1,

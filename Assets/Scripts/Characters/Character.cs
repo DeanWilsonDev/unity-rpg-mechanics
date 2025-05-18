@@ -33,5 +33,7 @@ namespace Characters
         }
 
         public abstract void KillCharacter();
+        public abstract void OnDeath();
+        public abstract void Move();
     }
 }

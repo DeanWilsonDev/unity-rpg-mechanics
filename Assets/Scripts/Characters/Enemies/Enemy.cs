@@ -15,5 +15,15 @@ namespace Characters.Enemies
         {
             throw new System.NotImplementedException();
         }
+
+        public override void OnDeath()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Move()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
