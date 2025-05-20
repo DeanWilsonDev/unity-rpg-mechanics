@@ -1,6 +1,4 @@
-using UnityEngine;
 using System;
-using Characters;
 
 namespace Characters.Statistics
 {

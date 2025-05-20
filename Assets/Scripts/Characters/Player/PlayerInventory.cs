@@ -10,5 +10,6 @@ namespace Characters.Player
             consumableItem.OnConsume(character.statistics);
             RemoveItemFromInventory(consumableItem);
         }
+        
     }
 }
