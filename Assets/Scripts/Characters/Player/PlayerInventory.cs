@@ -7,7 +7,7 @@ namespace Characters.Player
         
         public void UseItem(Consumable consumableItem, Character character)
         {
-            consumableItem.OnConsume(character.statistics);
+            consumableItem.OnConsume(character.Statistics);
             RemoveItemFromInventory(consumableItem);
         }
         

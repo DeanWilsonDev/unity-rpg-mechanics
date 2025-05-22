@@ -5,9 +5,15 @@ namespace Characters
 {
     public abstract class Character : MonoBehaviour, IDamagable
     {
-        [SerializeField] public CharacterStatistics statistics;
-        [SerializeField] public string characterName;
-        [SerializeField] public CharacterType characterType;
+        [SerializeField] protected internal CharacterStatistics statistics;
+        [SerializeField] protected internal string characterName;
+        [SerializeField] protected internal CharacterType characterType;
+        [SerializeField] protected internal Inventory inventory;
+
+        public CharacterStatistics Statistics => statistics;
+        public string CharacterName => characterName;
+        public CharacterType CharacterType => characterType;
+        public Inventory Inventory => inventory;
 
         protected virtual void Start()
         {
