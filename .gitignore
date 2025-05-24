@@ -61,3 +61,9 @@ Materials/
 # ======================== #
 ProjectSettings/TagManager.asset
 # Any other persistent you might want excluded
+
+
+# ============================ #
+# External Packages and Assets #
+# ============================ #
+Assets/Packages/*
