@@ -1,8 +1,7 @@
 using System;
-using RPGMechanics.Characters;
 using UnityEngine;
 
-namespace Characters.Statistics
+namespace RPGMechanics.Characters.Statistics
 {
     [Serializable]
     public class CharacterStatistics

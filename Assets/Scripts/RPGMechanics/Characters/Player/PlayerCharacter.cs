@@ -5,9 +5,8 @@ namespace RPGMechanics.Characters.Player
 {
     public class PlayerCharacter : Character
     {
-        [SerializeField] private PlayerInventory inventory;
-
-        public PlayerInventory Inventory => inventory;
+        [field: SerializeField] public PlayerInventory PlayerInventory { get; private set; }
+        public override Inventory Inventory => PlayerInventory;
 
         protected override void Start()
         {

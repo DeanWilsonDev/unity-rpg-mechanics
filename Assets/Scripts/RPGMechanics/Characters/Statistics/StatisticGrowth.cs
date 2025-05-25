@@ -1,7 +1,6 @@
 using System;
-using RPGMechanics.Characters;
 
-namespace Characters.Statistics
+namespace RPGMechanics.Characters.Statistics
 {
     [Serializable]
     public class StatisticGrowth

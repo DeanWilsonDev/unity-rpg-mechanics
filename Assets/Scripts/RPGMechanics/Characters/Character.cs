@@ -1,4 +1,4 @@
-using Characters.Statistics;
+using RPGMechanics.Characters.Statistics;
 using UnityEngine;
 
 namespace RPGMechanics.Characters
@@ -8,12 +8,12 @@ namespace RPGMechanics.Characters
         [SerializeField] protected internal CharacterStatistics statistics;
         [SerializeField] protected internal string characterName;
         [SerializeField] protected internal CharacterType characterType;
-        [SerializeField] protected internal Inventory inventory;
 
         public CharacterStatistics Statistics => statistics;
         public string CharacterName => characterName;
         public CharacterType CharacterType => characterType;
-        public Inventory Inventory => inventory;
+
+        public abstract Inventory Inventory { get; }
 
         protected virtual void Start()
         {

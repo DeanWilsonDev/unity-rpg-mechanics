@@ -5,7 +5,8 @@ namespace RPGMechanics.Characters.Enemies
 {
     public class Enemy : Character
     {
-        [SerializeField] private EnemyInventory inventory;
+        [field: SerializeField] public EnemyInventory EnemyInventory { get; private set; }
+        public override Inventory Inventory => EnemyInventory;
 
         protected override void Start()
         {

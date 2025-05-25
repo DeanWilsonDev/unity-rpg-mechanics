@@ -1,25 +1,36 @@
 using System;
+
 using UnityEngine;
 
 namespace RPGMechanics.StateMachines.Player
 {
     public class PlayerTestState : PlayerBaseState
     {
-        private float timer = 5;
-
-        public PlayerTestState(PlayerStateMachine stateMachine) : base(stateMachine)
-        {
-        }
+        public PlayerTestState(PlayerStateMachine stateMachine) : base(stateMachine) { }
 
         public override void Enter()
         {
+            Debug.Log("Enter");
         }
 
         public override void Tick(float deltaTime)
         {
-            timer -= deltaTime;
-            if (timer <= 0) stateMachine.SwitchState(new PlayerTestState(stateMachine));
-            Debug.Log(MathF.Floor(timer));
+            Vector3 movement = new Vector3();
+            movement.x = stateMachine.InputReader.MovementValue.x;
+            movement.y = 0;
+            movement.z = stateMachine.InputReader.MovementValue.y;
+            stateMachine.CharacterController.Move(movement * stateMachine.FreeLookMovementSpeed * deltaTime);
+            Debug.Log(stateMachine.InputReader.MovementValue);
+
+            if (stateMachine.InputReader.MovementValue == Vector2.zero)
+            {
+                stateMachine.Animator.SetFloat("FreeLookSpeed", 0, 0.1f, deltaTime);
+                return;
+            }
+            
+            stateMachine.Animator.SetFloat("FreeLookSpeed", 1, 0.1f, deltaTime);
+            stateMachine.transform.rotation = Quaternion.LookRotation(movement);
+
         }
 
         public override void Exit()

@@ -1,4 +1,4 @@
-using Characters.Statistics;
+using RPGMechanics.Characters.Statistics;
 
 namespace RPGMechanics.Items
 {
