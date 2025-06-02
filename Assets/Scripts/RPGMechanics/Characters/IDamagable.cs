@@ -14,11 +14,5 @@ namespace RPGMechanics.Characters
         /// </summary>
         /// <returns>true if the character is dead, false if alive</returns>
         public bool IsDead();
-
-
-        /// <summary>
-        ///     Kills the character.
-        /// </summary>
-        public void KillCharacter();
     }
 }

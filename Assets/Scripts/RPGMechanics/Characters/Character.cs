@@ -1,13 +1,26 @@
+using System;
+
 using RPGMechanics.Characters.Statistics;
+using RPGMechanics.StateMachines;
+
 using UnityEngine;
+
+using StateMachine = RPGMechanics.StateMachines.StateMachine;
 
 namespace RPGMechanics.Characters
 {
     public abstract class Character : MonoBehaviour, IDamagable
     {
+        public event Action DeathEvent;
         [SerializeField] protected internal CharacterStatistics statistics;
         [SerializeField] protected internal string characterName;
         [SerializeField] protected internal CharacterType characterType;
+        [SerializeField] protected internal StateMachine stateMachine;
+        protected abstract StateMachine StateMachine { get; }
+        public abstract State DeathState { get; set; }
+        public abstract State IdleState { get; set; }
+        public abstract State RunningState { get; set; }
+        
 
         public CharacterStatistics Statistics => statistics;
         public string CharacterName => characterName;
@@ -25,8 +38,7 @@ namespace RPGMechanics.Characters
             var finalDamage = Mathf.Max(damage - statistics.Constitution, 0);
             statistics.CurrentHealth -= finalDamage;
             statistics.CurrentHealth = Mathf.Max(statistics.CurrentHealth, 0);
-            if (IsDead()) KillCharacter();
-
+            if (IsDead()) StateMachine.SwitchState(DeathState);
             return statistics.CurrentHealth;
         }
 
@@ -34,9 +46,5 @@ namespace RPGMechanics.Characters
         {
             return statistics.CurrentHealth <= 0;
         }
-
-        public abstract void KillCharacter();
-        public abstract void OnDeath();
-        public abstract void Move();
     }
 }
