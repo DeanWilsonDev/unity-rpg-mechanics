@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace RPGMechanics.StateMachines.Player
 {
-    public class PlayerTestState : PlayerBaseState
+    public class PlayerFreeLookState : PlayerBaseState
     {
-        public PlayerTestState(PlayerStateMachine stateMachine) : base(stateMachine) { }
+        public PlayerFreeLookState(PlayerStateMachine stateMachine) : base(stateMachine) { }
 
         public override void Enter()
         {
@@ -16,8 +16,7 @@ namespace RPGMechanics.StateMachines.Player
         public override void Tick(float deltaTime)
         {
             Vector3 movement = CalculateMovement();
-            stateMachine.CharacterController.Move(movement * stateMachine.FreeLookMovementSpeed * deltaTime);
-            Debug.Log(stateMachine.InputReader.MovementValue);
+            stateMachine.CharacterController.Move(movement * (stateMachine.FreeLookMovementSpeed * deltaTime));
 
             if (stateMachine.InputReader.MovementValue == Vector2.zero)
             {
@@ -27,6 +26,11 @@ namespace RPGMechanics.StateMachines.Player
 
             stateMachine.Animator.SetFloat("FreeLookSpeed", 1, 0.1f, deltaTime);
             stateMachine.transform.rotation = Quaternion.LookRotation(movement);
+
+            if (stateMachine.InputReader.IsAttacking)
+            {
+                stateMachine.SwitchState(new PlayerAttackState(stateMachine));
+            }
         }
 
         public override void Exit()

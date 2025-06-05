@@ -5,11 +5,15 @@ using UnityEngine.InputSystem;
 namespace RPGMechanics.Input
 {
     public class InputReader : MonoBehaviour, InputSystem.IPlayerActions
+    
     {
         public event Action JumpEvent;
         public event Action DodgeEvent;
         
+        public event Action AttackEvent;
+        
         public Vector2 MovementValue { get; private set; }
+        public bool IsAttacking { get; set; }
 
         private InputSystem inputSystem;
 
@@ -46,6 +50,14 @@ namespace RPGMechanics.Input
         public void OnLook(InputAction.CallbackContext context)
         {
             
+        }
+
+        public void OnAttack(InputAction.CallbackContext context)
+        {
+            if (!context.performed) return;
+            Debug.Log("Event Triggered");
+            IsAttacking = true;
+            AttackEvent?.Invoke();
         }
     }
 }

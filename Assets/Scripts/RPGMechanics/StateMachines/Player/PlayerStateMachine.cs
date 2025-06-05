@@ -19,7 +19,7 @@ namespace RPGMechanics.StateMachines.Player
             {
                 MainCameraTransform = Camera.main.transform;
             }
-            SwitchState(new PlayerTestState(this));
+            SwitchState(new PlayerFreeLookState(this));
         }
     }
 }
