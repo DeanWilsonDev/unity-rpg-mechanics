@@ -1,10 +1,12 @@
 using System;
 
 using RPGMechanics.Characters.Statistics;
-using RPGMechanics.StateMachines;
+
+using Unity.VisualScripting;
 
 using UnityEngine;
 
+using State = RPGMechanics.StateMachines.State;
 using StateMachine = RPGMechanics.StateMachines.StateMachine;
 
 namespace RPGMechanics.Characters
@@ -16,11 +18,7 @@ namespace RPGMechanics.Characters
         [SerializeField] protected internal string characterName;
         [SerializeField] protected internal CharacterType characterType;
         [SerializeField] protected internal StateMachine stateMachine;
-        protected abstract StateMachine StateMachine { get; }
-        public abstract State DeathState { get; set; }
-        public abstract State IdleState { get; set; }
-        public abstract State RunningState { get; set; }
-        
+        [DoNotSerialize] protected abstract StateMachine StateMachine { get; }
 
         public CharacterStatistics Statistics => statistics;
         public string CharacterName => characterName;
@@ -38,7 +36,7 @@ namespace RPGMechanics.Characters
             var finalDamage = Mathf.Max(damage - statistics.Constitution, 0);
             statistics.CurrentHealth -= finalDamage;
             statistics.CurrentHealth = Mathf.Max(statistics.CurrentHealth, 0);
-            if (IsDead()) StateMachine.SwitchState(DeathState);
+            if (IsDead()){} // TODO: Find a way to kill the player by changing their state in the state machine
             return statistics.CurrentHealth;
         }
 
@@ -46,5 +44,6 @@ namespace RPGMechanics.Characters
         {
             return statistics.CurrentHealth <= 0;
         }
+
     }
 }

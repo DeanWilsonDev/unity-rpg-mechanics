@@ -55,7 +55,7 @@ namespace RPGMechanics.Input
         public void OnAttack(InputAction.CallbackContext context)
         {
             if (!context.performed) return;
-            Debug.Log("Event Triggered");
+            // Debug.Log("Event Triggered");
             IsAttacking = true;
             AttackEvent?.Invoke();
         }
