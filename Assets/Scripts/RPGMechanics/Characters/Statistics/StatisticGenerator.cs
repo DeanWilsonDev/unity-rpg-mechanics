@@ -24,7 +24,6 @@ namespace RPGMechanics.Characters.Statistics
             };
         }
 
-
         private static int ApplyModifier(int statistic, float modifier, int level)
         {
             return Mathf.RoundToInt(statistic * Mathf.Pow(modifier, level - 1));

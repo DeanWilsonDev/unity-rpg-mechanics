@@ -1,4 +1,4 @@
-using Unity.VisualScripting;
+using RPGMechanics.Weapons;
 
 using UnityEngine;
 
@@ -9,9 +9,6 @@ namespace RPGMechanics.StateMachines.Player
         private static readonly int IsAttacking = Animator.StringToHash("IsAttacking");
         public PlayerStateMachine PlayerStateMachine { get; set; }
 
-        private float attackRange = 2.0f;
-        private float attackRadius = 0.5f;
-        private int attackDamage = 10;
         private LayerMask hitLayerMask = LayerMask.GetMask("Enemy");
         private RaycastHit hit;
 
@@ -24,7 +21,7 @@ namespace RPGMechanics.StateMachines.Player
         public override void Enter()
         {
             // Debug.Log("Attack State Entered");
-            PlayerStateMachine.Animator.SetBool(IsAttacking, true);
+            PlayerStateMachine.PlayerCharacter.Animator.SetBool(IsAttacking, true);
         }
 
         public override void Tick(float deltaTime)
@@ -40,20 +37,21 @@ namespace RPGMechanics.StateMachines.Player
         public override void Exit()
         {
             // Debug.Log("Attack State Exit");
-            PlayerStateMachine.InputReader.IsAttacking = false;
-            PlayerStateMachine.Animator.SetBool(IsAttacking, false);
+            PlayerStateMachine.PlayerCharacter.InputReader.IsAttacking = false;
+            PlayerStateMachine.PlayerCharacter.Animator.SetBool(IsAttacking, false);
         }
 
         public void Attack()
         {
             Transform attackOrigin = PlayerStateMachine.transform;
             Vector3 direction = attackOrigin.forward;
+            Weapon currentWeapon = stateMachine.PlayerCharacter.CurrentWeapon;
 
-            var success = Physics.SphereCast(attackOrigin.position, attackRadius, direction, out hit,
-                attackRange,
+            var success = Physics.SphereCast(attackOrigin.position, currentWeapon.Radius, direction, out hit,
+                currentWeapon.Range,
                 hitLayerMask);
 
-            Debug.DrawRay(attackOrigin.position, direction * attackRange, Color.red, 1.0f);
+            Debug.DrawRay(attackOrigin.position, direction * currentWeapon.Range, Color.red, 1.0f);
 
             if (success)
             {
@@ -61,16 +59,18 @@ namespace RPGMechanics.StateMachines.Player
                 var enemy = hit.collider.GetComponent<Characters.Enemies.Enemy>();
                 if (enemy)
                 {
-                    enemy.TakeDamage(attackDamage);
+                    enemy.TakeDamage(currentWeapon.Damage);
                 }
             }
         }
 
+        // TODO: This function needs to be implemented but it probably wont work here.
+        // TODO: Debug class?
         private void OnDrawGizmos()
         {
             if (!PlayerStateMachine) { return; }
             Transform attackOrigin = PlayerStateMachine.transform;
-            Gizmos.DrawWireSphere(attackOrigin.position, attackRange);
+            Gizmos.DrawWireSphere(attackOrigin.position, PlayerStateMachine.PlayerCharacter.CurrentWeapon.Radius);
         }
     }
 }

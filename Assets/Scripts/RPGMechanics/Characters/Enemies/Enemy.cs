@@ -12,8 +12,6 @@ namespace RPGMechanics.Characters.Enemies
     public class Enemy : Character
     {
         [field: SerializeField] public EnemyInventory EnemyInventory { get; private set; }
-        [field: SerializeField] public EnemyStateMachine EnemyStateMachine { get; set; }
-        protected override StateMachine StateMachine => EnemyStateMachine;
         public override Inventory Inventory => EnemyInventory;
 
         protected override void Start()

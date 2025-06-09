@@ -1,4 +1,6 @@
+using RPGMechanics.Characters.Player;
 using RPGMechanics.Input;
+using RPGMechanics.Weapons;
 
 using UnityEngine;
 
@@ -6,12 +8,16 @@ namespace RPGMechanics.StateMachines.Player
 {
     public class PlayerStateMachine : StateMachine
     {
-        [field: SerializeField] public InputReader InputReader { get; private set; }
-        [field: SerializeField] public CharacterController CharacterController { get; private set; }
-        [field: SerializeField] public Animator Animator { get; private set; }
+        // TODO: This can probably go on the PlayerCharacter
         [field: SerializeField] public float FreeLookMovementSpeed { get; private set; }
+        [field: SerializeField] public PlayerCharacter PlayerCharacter { get; set; }
         
         public Transform MainCameraTransform { get; private set; }
+
+        private void Awake()
+        {
+            if (!PlayerCharacter) { PlayerCharacter = GetComponent<PlayerCharacter>(); }
+        }
         
         private void Start()
         {

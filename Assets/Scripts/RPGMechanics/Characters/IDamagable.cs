@@ -7,7 +7,7 @@ namespace RPGMechanics.Characters
         /// </summary>
         /// <param name="damage">The raw damage value pre damage calculation</param>
         /// <returns>Remaining Health</returns>
-        public float TakeDamage(int damage);
+        public float TakeDamage(float damage);
 
         /// <summary>
         ///     Checks to see if the character is dead.

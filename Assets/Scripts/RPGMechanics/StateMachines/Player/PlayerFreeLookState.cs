@@ -16,18 +16,18 @@ namespace RPGMechanics.StateMachines.Player
         public override void Tick(float deltaTime)
         {
             Vector3 movement = CalculateMovement();
-            stateMachine.CharacterController.Move(movement * (stateMachine.FreeLookMovementSpeed * deltaTime));
+            stateMachine.PlayerCharacter.CharacterController.Move(movement * (stateMachine.FreeLookMovementSpeed * deltaTime));
 
-            if (stateMachine.InputReader.MovementValue == Vector2.zero)
+            if (stateMachine.PlayerCharacter.InputReader.MovementValue == Vector2.zero)
             {
-                stateMachine.Animator.SetFloat("FreeLookSpeed", 0, 0.1f, deltaTime);
+                stateMachine.PlayerCharacter.Animator.SetFloat("FreeLookSpeed", 0, 0.1f, deltaTime);
                 return;
             }
 
-            stateMachine.Animator.SetFloat("FreeLookSpeed", 1, 0.1f, deltaTime);
+            stateMachine.PlayerCharacter.Animator.SetFloat("FreeLookSpeed", 1, 0.1f, deltaTime);
             stateMachine.transform.rotation = Quaternion.LookRotation(movement);
 
-            if (stateMachine.InputReader.IsAttacking)
+            if (stateMachine.PlayerCharacter.InputReader.IsAttacking)
             {
                 stateMachine.SwitchState(new PlayerAttackState(stateMachine));
             }
@@ -49,8 +49,8 @@ namespace RPGMechanics.StateMachines.Player
             forward.Normalize();
             right.Normalize();
 
-            return forward * stateMachine.InputReader.MovementValue.y +
-                   right * stateMachine.InputReader.MovementValue.x;
+            return forward * stateMachine.PlayerCharacter.InputReader.MovementValue.y +
+                   right * stateMachine.PlayerCharacter.InputReader.MovementValue.x;
         }
     }
 }
