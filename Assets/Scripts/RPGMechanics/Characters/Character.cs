@@ -18,7 +18,7 @@ namespace RPGMechanics.Characters
         [SerializeField] protected internal string characterName;
         [SerializeField] protected internal CharacterType characterType;
         // TODO: This will probably come from the Inventory somehow
-        [field: SerializeField] public Weapon CurrentWeapon;
+        [SerializeField] protected internal Weapon CurrentWeapon;
         [field: SerializeField] public Animator Animator { get; private set; }
 
         public CharacterStatistics Statistics => statistics;

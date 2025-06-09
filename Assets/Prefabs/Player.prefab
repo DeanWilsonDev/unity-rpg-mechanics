@@ -446,6 +446,37 @@ Transform:
   - {fileID: 6726156500833167141}
   m_Father: {fileID: 5221061081854350808}
   m_LocalEulerAnglesHint: {x: 28.84501, y: -11.585431, z: -27.784077}
+--- !u!1 &2120667882319284410
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 998949213435635973}
+  m_Layer: 0
+  m_Name: WeaponSlot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &998949213435635973
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2120667882319284410}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.49856287, y: 0.50140405, z: -0.50261384, w: -0.49740168}
+  m_LocalPosition: {x: -0.049924884, y: 0.14011733, z: 0.03020207}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7843911241503340422}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2324628616363720852
 GameObject:
   m_ObjectHideFlags: 0
@@ -1850,6 +1881,7 @@ Transform:
   - {fileID: 1932629154200683818}
   - {fileID: 4692858926563785414}
   - {fileID: 6586689998839795786}
+  - {fileID: 998949213435635973}
   m_Father: {fileID: 2820923264528967340}
   m_LocalEulerAnglesHint: {x: -12.421653, y: 5.3142977, z: 11.132991}
 --- !u!1 &6854913701230740053
@@ -1897,6 +1929,8 @@ GameObject:
   - component: {fileID: 5139546787001499336}
   - component: {fileID: 7690665827962571633}
   - component: {fileID: 4834252200554073159}
+  - component: {fileID: 3151317678068194503}
+  - component: {fileID: 7519927428550369667}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1934,10 +1968,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f13e80f60bcb4f228e7f7a5dae6d9c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <InputReader>k__BackingField: {fileID: 5139546787001499336}
-  <CharacterController>k__BackingField: {fileID: 7690665827962571633}
-  <Animator>k__BackingField: {fileID: 4834252200554073159}
   <FreeLookMovementSpeed>k__BackingField: 6
+  <PlayerCharacter>k__BackingField: {fileID: 0}
 --- !u!114 &5139546787001499336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1997,6 +2029,55 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3151317678068194503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7255990305662189837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f43115cd5d8d470f974c17992482b794, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statistics:
+    level: 0
+    maxLevel: 0
+    currentExperience: 0
+    experienceToNextLevel: 0
+    vitality: 0
+    currentHealth: 0
+    endurance: 0
+    currentStamina: 0
+    carryWeight: 0
+    strength: 0
+    dexterity: 0
+    constitution: 0
+    intelligence: 0
+    wisdom: 0
+    charisma: 0
+  characterName: Player
+  characterType: 0
+  CurrentWeapon: {fileID: 0}
+  <Animator>k__BackingField: {fileID: 4834252200554073159}
+  <CharacterHealth>k__BackingField: {fileID: 7519927428550369667}
+  <InputReader>k__BackingField: {fileID: 5139546787001499336}
+  <CharacterController>k__BackingField: {fileID: 7690665827962571633}
+--- !u!114 &7519927428550369667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7255990305662189837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e837b932a8fc430ba84eaf66078c9f98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <CurrentHealth>k__BackingField: 100
+  <MaxHealth>k__BackingField: 100
 --- !u!1 &7440405260005386774
 GameObject:
   m_ObjectHideFlags: 0

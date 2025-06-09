@@ -1,3 +1,4 @@
+using RPGMechanics.Debugging;
 using RPGMechanics.Weapons;
 
 using UnityEngine;
@@ -6,6 +7,10 @@ namespace RPGMechanics.StateMachines.Player
 {
     public class PlayerAttackState : PlayerBaseState
     {
+        // TODO: These can probably go on the weapon
+        private float attackDuration = 1.0f;
+        private float attackStartTime;
+        
         private static readonly int IsAttacking = Animator.StringToHash("IsAttacking");
         public PlayerStateMachine PlayerStateMachine { get; set; }
 
@@ -21,17 +26,21 @@ namespace RPGMechanics.StateMachines.Player
         public override void Enter()
         {
             // Debug.Log("Attack State Entered");
+            attackStartTime = Time.time;
             PlayerStateMachine.PlayerCharacter.Animator.SetBool(IsAttacking, true);
+            Attack();
         }
 
         public override void Tick(float deltaTime)
         {
             // Add logic for attacking
             //Debug.Log("Attack State Tick");
-            Attack();
 
-            // TODO: A next function would be so much better than this
-            PlayerStateMachine.SwitchState(new PlayerFreeLookState(PlayerStateMachine));
+            if (Time.time - attackStartTime >= attackDuration)
+            {
+                // TODO: A next function would be so much better than this
+                SwitchState(new PlayerFreeLookState(PlayerStateMachine));
+            }
         }
 
         public override void Exit()
@@ -51,26 +60,22 @@ namespace RPGMechanics.StateMachines.Player
                 currentWeapon.Range,
                 hitLayerMask);
 
-            Debug.DrawRay(attackOrigin.position, direction * currentWeapon.Range, Color.red, 1.0f);
+            Debug.Log("Attacking");
 
-            if (success)
+            DebugDrawManager.Instance?.DrawWireSphere(
+                attackOrigin.position,
+                PlayerStateMachine.PlayerCharacter.CurrentWeapon.Radius,
+                Color.red
+            );
+
+            if (!success) { return; }
+
+            Debug.Log($"Hit: {hit.collider.name}");
+            var enemy = hit.collider.GetComponent<Characters.Enemies.Enemy>();
+            if (enemy)
             {
-                Debug.Log($"Hit: {hit.collider.name}");
-                var enemy = hit.collider.GetComponent<Characters.Enemies.Enemy>();
-                if (enemy)
-                {
-                    enemy.TakeDamage(currentWeapon.Damage);
-                }
+                enemy.TakeDamage(currentWeapon.Damage);
             }
-        }
-
-        // TODO: This function needs to be implemented but it probably wont work here.
-        // TODO: Debug class?
-        private void OnDrawGizmos()
-        {
-            if (!PlayerStateMachine) { return; }
-            Transform attackOrigin = PlayerStateMachine.transform;
-            Gizmos.DrawWireSphere(attackOrigin.position, PlayerStateMachine.PlayerCharacter.CurrentWeapon.Radius);
         }
     }
 }

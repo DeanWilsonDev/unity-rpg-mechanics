@@ -6,14 +6,12 @@ namespace RPGMechanics.StateMachines
 {
     public abstract class StateMachine : MonoBehaviour
     {
-        
         private State currentState;
 
-        private void Update()
+        protected void Update()
         {
             currentState?.Tick(Time.deltaTime);
         }
-
 
         public void SwitchState(State newState)
         {

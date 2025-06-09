@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace RPGMechanics.Weapons
 {
-    public abstract class Weapon
+    public class Weapon: MonoBehaviour
     {
         [field: SerializeField] public float Damage { get; set; }
         [field: SerializeField] public float Range { get; set; }

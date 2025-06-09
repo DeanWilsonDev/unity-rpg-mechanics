@@ -4,9 +4,11 @@ namespace RPGMechanics.StateMachines.Player
     {
         protected PlayerStateMachine stateMachine;
 
-        public PlayerBaseState(PlayerStateMachine stateMachine)
+        public PlayerBaseState(PlayerStateMachine stateMachine): base(stateMachine)
         {
             this.stateMachine = stateMachine;
         }
+        
+        
     }
 }
