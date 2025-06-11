@@ -9,7 +9,7 @@ namespace RPGMechanics.StateMachines.Player
     {
         // TODO: These can probably go on the weapon
         private float attackDuration = 1.0f;
-        private float attackStartTime;
+        private float timeElapsed;
         
         private static readonly int IsAttacking = Animator.StringToHash("IsAttacking");
         public PlayerStateMachine PlayerStateMachine { get; set; }
@@ -25,8 +25,8 @@ namespace RPGMechanics.StateMachines.Player
 
         public override void Enter()
         {
-            // Debug.Log("Attack State Entered");
-            attackStartTime = Time.time;
+            Debug.Log("Attack State Entered");
+            timeElapsed = 0;
             PlayerStateMachine.PlayerCharacter.Animator.SetBool(IsAttacking, true);
             Attack();
         }
@@ -36,7 +36,9 @@ namespace RPGMechanics.StateMachines.Player
             // Add logic for attacking
             //Debug.Log("Attack State Tick");
 
-            if (Time.time - attackStartTime >= attackDuration)
+            timeElapsed += deltaTime;
+
+            if (timeElapsed >= attackDuration)
             {
                 // TODO: A next function would be so much better than this
                 SwitchState(new PlayerFreeLookState(PlayerStateMachine));
@@ -52,15 +54,15 @@ namespace RPGMechanics.StateMachines.Player
 
         public void Attack()
         {
-            Transform attackOrigin = PlayerStateMachine.transform;
+            Weapon currentWeapon = PlayerStateMachine.PlayerCharacter.CurrentWeapon;
+            Transform attackOrigin = currentWeapon.transform;
             Vector3 direction = attackOrigin.forward;
-            Weapon currentWeapon = stateMachine.PlayerCharacter.CurrentWeapon;
 
             var success = Physics.SphereCast(attackOrigin.position, currentWeapon.Radius, direction, out hit,
                 currentWeapon.Range,
                 hitLayerMask);
 
-            Debug.Log("Attacking");
+            Debug.Log("Draw Now");
 
             DebugDrawManager.Instance?.DrawWireSphere(
                 attackOrigin.position,

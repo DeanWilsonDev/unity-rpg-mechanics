@@ -44,7 +44,7 @@ namespace RPGMechanics.Debugging
                 Gizmos.DrawWireSphere(sphere.Position, sphere.Radius);
             }
 
-            spheresToDraw.Clear();
+            //spheresToDraw.Clear();
         }
     }
 }

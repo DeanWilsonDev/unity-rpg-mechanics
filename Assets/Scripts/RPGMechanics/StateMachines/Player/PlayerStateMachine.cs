@@ -1,4 +1,5 @@
 using RPGMechanics.Characters.Player;
+using RPGMechanics.Input;
 
 using UnityEngine;
 
@@ -23,10 +24,12 @@ namespace RPGMechanics.StateMachines.Player
             {
                 MainCameraTransform = Camera.main.transform;
             }
-            SwitchState(new PlayerFreeLookState(this));
+
+            PlayerCharacter.InputReader.OnAttackEvent += HandleAttack;
+            CurrentState = new PlayerFreeLookState(this);
         }
 
-        private void ReadInput()
+        private void HandleAttack()
         {
             if (PlayerCharacter.InputReader.IsAttacking)
             {
@@ -37,7 +40,6 @@ namespace RPGMechanics.StateMachines.Player
         protected void Update()
         {
             base.Update();
-            ReadInput();
         }
     }
 }

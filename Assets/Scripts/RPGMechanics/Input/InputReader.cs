@@ -10,7 +10,7 @@ namespace RPGMechanics.Input
         public event Action JumpEvent;
         public event Action DodgeEvent;
         
-        public event Action AttackEvent;
+        public event Action OnAttackEvent;
         
         public Vector2 MovementValue { get; private set; }
         public bool IsAttacking { get; set; }
@@ -57,7 +57,7 @@ namespace RPGMechanics.Input
             if (!context.performed) return;
             // Debug.Log("Event Triggered");
             IsAttacking = true;
-            AttackEvent?.Invoke();
+            OnAttackEvent?.Invoke();
         }
     }
 }

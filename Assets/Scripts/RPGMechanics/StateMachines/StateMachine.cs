@@ -6,18 +6,19 @@ namespace RPGMechanics.StateMachines
 {
     public abstract class StateMachine : MonoBehaviour
     {
-        private State currentState;
+        [field: SerializeField] public State CurrentState;
 
         protected void Update()
         {
-            currentState?.Tick(Time.deltaTime);
+            CurrentState?.Tick(Time.deltaTime);
         }
 
         public void SwitchState(State newState)
         {
-            currentState?.Exit();
-            currentState = newState;
-            currentState?.Enter();
+            if (newState.GetType() == CurrentState.GetType()) return;
+            CurrentState?.Exit();
+            CurrentState = newState;
+            CurrentState?.Enter();
         }
     }
 }

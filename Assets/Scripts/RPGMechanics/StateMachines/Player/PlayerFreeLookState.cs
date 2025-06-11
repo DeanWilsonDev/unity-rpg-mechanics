@@ -10,7 +10,7 @@ namespace RPGMechanics.StateMachines.Player
 
         public override void Enter()
         {
-            // Debug.Log("Enter");
+           Debug.Log("Enter");
         }
 
         public override void Tick(float deltaTime)
@@ -26,11 +26,6 @@ namespace RPGMechanics.StateMachines.Player
 
             stateMachine.PlayerCharacter.Animator.SetFloat("FreeLookSpeed", 1, 0.1f, deltaTime);
             stateMachine.transform.rotation = Quaternion.LookRotation(movement);
-
-            if (stateMachine.PlayerCharacter.InputReader.IsAttacking)
-            {
-                stateMachine.SwitchState(new PlayerAttackState(stateMachine));
-            }
         }
 
         public override void Exit()
