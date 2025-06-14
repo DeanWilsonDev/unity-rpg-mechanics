@@ -148,9 +148,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c955fd2a47c4e39a3e43fc3f1667093, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Damage>k__BackingField: 10
-  <Range>k__BackingField: 5
-  <Radius>k__BackingField: 0.05
+  <Damage>k__BackingField: 16
+  <Range>k__BackingField: 1
+  <Radius>k__BackingField: 0.5
+  <WeaponAttackArea>k__BackingField: {fileID: 755055093}
+  <WeaponHoldSlot>k__BackingField: {fileID: 489518618}
 --- !u!4 &51893968
 Transform:
   m_ObjectHideFlags: 0
@@ -160,10 +162,12 @@ Transform:
   m_GameObject: {fileID: 51893966}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.4378266, y: -1.2631269, z: 4.9537888}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 489518618}
+  - {fileID: 755055093}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &174556590
@@ -394,10 +398,6 @@ PrefabInstance:
       propertyPath: CurrentWeapon
       value: 
       objectReference: {fileID: 51893967}
-    - target: {fileID: 6786205712643912901, guid: 210a32340e1364694ba6a16a1a7806e6, type: 3}
-      propertyPath: <PlayerCharacter>k__BackingField
-      value: 
-      objectReference: {fileID: 596360524}
     - target: {fileID: 7255990305662189837, guid: 210a32340e1364694ba6a16a1a7806e6, type: 3}
       propertyPath: m_Name
       value: Player
@@ -508,6 +508,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 537c7daa79c0241b59b550adaa1b8fde, type: 3}
+--- !u!1 &489518617
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 489518618}
+  m_Layer: 0
+  m_Name: WeaponHoldSlot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &489518618
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 489518617}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 51893968}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &545397554
 GameObject:
   m_ObjectHideFlags: 0
@@ -633,17 +664,37 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   CustomBlends: {fileID: 0}
---- !u!114 &596360524 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3151317678068194503, guid: 210a32340e1364694ba6a16a1a7806e6, type: 3}
-  m_PrefabInstance: {fileID: 322357588}
+--- !u!1 &755055092
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f43115cd5d8d470f974c17992482b794, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 755055093}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &755055093
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 755055092}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 51893968}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &762712447
 GameObject:
   m_ObjectHideFlags: 0
@@ -911,7 +962,7 @@ MonoBehaviour:
     maxLevel: 0
     currentExperience: 0
     experienceToNextLevel: 0
-    vitality: 0
+    maxHealth: 0
     currentHealth: 0
     endurance: 0
     currentStamina: 0
@@ -926,7 +977,8 @@ MonoBehaviour:
   characterType: 0
   CurrentWeapon: {fileID: 0}
   <Animator>k__BackingField: {fileID: 0}
-  <CharacterHealth>k__BackingField: {fileID: 0}
+  <CharacterHealth>k__BackingField: {fileID: 1103784576}
+  <WeaponSlot>k__BackingField: {fileID: 0}
 --- !u!136 &1103784572
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1030,8 +1082,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e837b932a8fc430ba84eaf66078c9f98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <CurrentHealth>k__BackingField: 0
-  <MaxHealth>k__BackingField: 0
 --- !u!1 &1162291949
 GameObject:
   m_ObjectHideFlags: 0
@@ -1070,7 +1120,7 @@ MonoBehaviour:
     maxLevel: 0
     currentExperience: 0
     experienceToNextLevel: 0
-    vitality: 0
+    maxHealth: 0
     currentHealth: 0
     endurance: 0
     currentStamina: 0
@@ -1086,6 +1136,7 @@ MonoBehaviour:
   CurrentWeapon: {fileID: 0}
   <Animator>k__BackingField: {fileID: 0}
   <CharacterHealth>k__BackingField: {fileID: 0}
+  <WeaponSlot>k__BackingField: {fileID: 0}
 --- !u!136 &1162291951
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1189,8 +1240,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e837b932a8fc430ba84eaf66078c9f98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <CurrentHealth>k__BackingField: 0
-  <MaxHealth>k__BackingField: 0
 --- !u!4 &1618384252 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1803295692683584788, guid: 210a32340e1364694ba6a16a1a7806e6, type: 3}
@@ -1292,7 +1341,7 @@ MonoBehaviour:
     maxLevel: 0
     currentExperience: 0
     experienceToNextLevel: 0
-    vitality: 0
+    maxHealth: 0
     currentHealth: 0
     endurance: 0
     currentStamina: 0
@@ -1303,11 +1352,12 @@ MonoBehaviour:
     intelligence: 0
     wisdom: 0
     charisma: 0
-  characterName: 
+  characterName: Steve
   characterType: 0
   CurrentWeapon: {fileID: 0}
   <Animator>k__BackingField: {fileID: 0}
-  <CharacterHealth>k__BackingField: {fileID: 0}
+  <CharacterHealth>k__BackingField: {fileID: 1847004113}
+  <WeaponSlot>k__BackingField: {fileID: 0}
 --- !u!136 &1847004109
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1411,8 +1461,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e837b932a8fc430ba84eaf66078c9f98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <CurrentHealth>k__BackingField: 0
-  <MaxHealth>k__BackingField: 0
 --- !u!1 &2106554013
 GameObject:
   m_ObjectHideFlags: 0

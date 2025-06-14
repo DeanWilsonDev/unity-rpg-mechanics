@@ -456,7 +456,7 @@ GameObject:
   m_Component:
   - component: {fileID: 998949213435635973}
   m_Layer: 0
-  m_Name: WeaponSlot
+  m_Name: WeaponSlot_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -470,8 +470,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2120667882319284410}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.49856287, y: 0.50140405, z: -0.50261384, w: -0.49740168}
-  m_LocalPosition: {x: -0.049924884, y: 0.14011733, z: 0.03020207}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1969,7 +1969,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <FreeLookMovementSpeed>k__BackingField: 6
-  <PlayerCharacter>k__BackingField: {fileID: 0}
+  <PlayerCharacter>k__BackingField: {fileID: 3151317678068194503}
 --- !u!114 &5139546787001499336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2062,6 +2062,7 @@ MonoBehaviour:
   CurrentWeapon: {fileID: 0}
   <Animator>k__BackingField: {fileID: 4834252200554073159}
   <CharacterHealth>k__BackingField: {fileID: 7519927428550369667}
+  <WeaponSlot>k__BackingField: {fileID: 998949213435635973}
   <InputReader>k__BackingField: {fileID: 5139546787001499336}
   <CharacterController>k__BackingField: {fileID: 7690665827962571633}
 --- !u!114 &7519927428550369667

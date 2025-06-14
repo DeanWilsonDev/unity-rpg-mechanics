@@ -1,5 +1,4 @@
 using RPGMechanics.Characters.Player;
-using RPGMechanics.Input;
 
 using UnityEngine;
 

@@ -6,10 +6,10 @@ namespace RPGMechanics.Characters.Statistics
     [Serializable]
     public class CharacterStatistics
     {
-        private const float BaseVitality = 100;
-        private const float VitalityScaleThreshold = 5;
+        private const float BaseMaxHealth = 100;
+        private const float MaxHealthScaleThreshold = 500;
         private const float BaseEndurance = 50;
-        private const float EnduranceScaleThreshold = 8;
+        private const float EnduranceScaleThreshold = 800;
         private const int BaseCarryWeight = 250;
         private const float CarryWeightScaleThreshold = 20;
         [SerializeField] private int level;
@@ -17,7 +17,7 @@ namespace RPGMechanics.Characters.Statistics
         [SerializeField] private int currentExperience;
         [SerializeField] private int experienceToNextLevel;
 
-        [SerializeField] private float vitality;
+        [SerializeField] private float maxHealth;
         [SerializeField] private float currentHealth;
         [SerializeField] private float endurance;
         [SerializeField] private float currentStamina;
@@ -72,10 +72,10 @@ namespace RPGMechanics.Characters.Statistics
         ///     Max Health
         ///     The amount of maximum health a character can have.
         /// </summary>
-        public float Vitality
+        public float MaxHealth
         {
-            get => vitality;
-            set => vitality = BaseVitality * (1 + Mathf.Pow(value / VitalityScaleThreshold, 2));
+            get => maxHealth;
+            set => maxHealth = value;
         }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace RPGMechanics.Characters.Statistics
         public float Endurance
         {
             get => endurance;
-            set => endurance = BaseEndurance * (1 + Mathf.Pow(value / EnduranceScaleThreshold, 2));
+            set => endurance = value;
         }
 
         /// <summary>
@@ -145,7 +145,7 @@ namespace RPGMechanics.Characters.Statistics
 
         /// <summary>
         ///     Damage Reduction
-        ///     Adds modifiers to damage taken and vitality gained at each level
+        ///     Adds modifiers to damage taken and max health gained at each level
         /// </summary>
         public int Constitution
         {
@@ -194,8 +194,8 @@ namespace RPGMechanics.Characters.Statistics
                 CharacterType.MeleeDamage => new CharacterStatistics
                 {
                     Level = 1,
-                    Vitality = BaseVitality,
-                    CurrentHealth = BaseVitality,
+                    MaxHealth = BaseMaxHealth,
+                    CurrentHealth = BaseMaxHealth,
                     Endurance = BaseEndurance,
                     CurrentStamina = BaseEndurance,
                     CarryWeight = BaseCarryWeight,
@@ -209,8 +209,8 @@ namespace RPGMechanics.Characters.Statistics
                 CharacterType.RangedDamage => new CharacterStatistics
                 {
                     Level = 1,
-                    Vitality = BaseVitality,
-                    CurrentHealth = BaseVitality,
+                    MaxHealth = BaseMaxHealth,
+                    CurrentHealth = BaseMaxHealth,
                     Endurance = BaseEndurance,
                     CurrentStamina = BaseEndurance,
                     CarryWeight = BaseCarryWeight,
@@ -224,8 +224,8 @@ namespace RPGMechanics.Characters.Statistics
                 CharacterType.FastAttacker => new CharacterStatistics
                 {
                     Level = 1,
-                    Vitality = BaseVitality,
-                    CurrentHealth = BaseVitality,
+                    MaxHealth = BaseMaxHealth,
+                    CurrentHealth = BaseMaxHealth,
                     Endurance = BaseEndurance,
                     CurrentStamina = BaseEndurance,
                     CarryWeight = BaseCarryWeight,
@@ -239,8 +239,8 @@ namespace RPGMechanics.Characters.Statistics
                 CharacterType.Healer => new CharacterStatistics
                 {
                     Level = 1,
-                    Vitality = BaseVitality,
-                    CurrentHealth = BaseVitality,
+                    MaxHealth = BaseMaxHealth,
+                    CurrentHealth = BaseMaxHealth,
                     Endurance = BaseEndurance,
                     CurrentStamina = BaseEndurance,
                     CarryWeight = BaseCarryWeight,
@@ -254,8 +254,8 @@ namespace RPGMechanics.Characters.Statistics
                 CharacterType.Tank => new CharacterStatistics
                 {
                     level = 1,
-                    Vitality = BaseVitality,
-                    CurrentHealth = BaseVitality,
+                    MaxHealth = BaseMaxHealth,
+                    CurrentHealth = BaseMaxHealth,
                     Endurance = BaseEndurance,
                     CurrentStamina = BaseEndurance,
                     CarryWeight = BaseCarryWeight,
@@ -269,8 +269,8 @@ namespace RPGMechanics.Characters.Statistics
                 _ => new CharacterStatistics
                 {
                     Level = 1,
-                    Vitality = BaseVitality,
-                    CurrentHealth = BaseVitality,
+                    MaxHealth = BaseMaxHealth,
+                    CurrentHealth = BaseMaxHealth,
                     Endurance = BaseEndurance,
                     CurrentStamina = BaseEndurance,
                     CarryWeight = BaseCarryWeight,

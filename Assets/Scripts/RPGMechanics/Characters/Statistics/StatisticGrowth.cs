@@ -20,7 +20,7 @@ namespace RPGMechanics.Characters.Statistics
             {
                 CharacterType.MeleeDamage => new StatisticGrowth
                 {
-                    VitalityMultiplier = 1.1f,
+                    VitalityMultiplier = 0.1f,
                     EnduranceMultiplier = 1.15f,
                     StrengthMultiplier = 1.25f,
                     DexterityMultiplier = 1.05f,
@@ -31,7 +31,7 @@ namespace RPGMechanics.Characters.Statistics
                 },
                 CharacterType.RangedDamage => new StatisticGrowth
                 {
-                    VitalityMultiplier = 1.1f,
+                    VitalityMultiplier = 0.1f,
                     EnduranceMultiplier = 1.15f,
                     StrengthMultiplier = 1.25f,
                     DexterityMultiplier = 1.15f,

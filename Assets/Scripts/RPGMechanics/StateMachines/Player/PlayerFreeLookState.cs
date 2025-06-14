@@ -10,7 +10,7 @@ namespace RPGMechanics.StateMachines.Player
 
         public override void Enter()
         {
-           Debug.Log("Enter");
+           // Debug.Log("Enter");
         }
 
         public override void Tick(float deltaTime)

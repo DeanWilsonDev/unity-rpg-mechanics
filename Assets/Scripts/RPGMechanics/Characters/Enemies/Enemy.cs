@@ -1,11 +1,7 @@
 using System;
 
-using RPGMechanics.StateMachines;
-using RPGMechanics.StateMachines.Enemy;
-
 using UnityEngine;
 
-using StateMachine = RPGMechanics.StateMachines.StateMachine;
 
 namespace RPGMechanics.Characters.Enemies
 {
@@ -14,14 +10,17 @@ namespace RPGMechanics.Characters.Enemies
         [field: SerializeField] public EnemyInventory EnemyInventory { get; private set; }
         public override Inventory Inventory => EnemyInventory;
 
-        protected override void Start()
-        {
-            base.Start();
-        }
-
         public void OnDeath()
         {
             throw new NotImplementedException();
+        }
+
+        public override float TakeDamage(float damage)
+        {
+            var remainingHealth = base.TakeDamage(damage);
+            var newColor = Color.Lerp(Color.red, Color.green, remainingHealth / 100);
+            gameObject.GetComponent<Renderer>().material.color = newColor;
+            return remainingHealth;
         }
     }
 }

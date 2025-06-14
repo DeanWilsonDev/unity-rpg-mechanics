@@ -10,7 +10,8 @@ namespace RPGMechanics.StateMachines.Player
         // TODO: These can probably go on the weapon
         private float attackDuration = 1.0f;
         private float timeElapsed;
-        
+        private bool hasDealtDamage = false;
+
         private static readonly int IsAttacking = Animator.StringToHash("IsAttacking");
         public PlayerStateMachine PlayerStateMachine { get; set; }
 
@@ -25,17 +26,15 @@ namespace RPGMechanics.StateMachines.Player
 
         public override void Enter()
         {
-            Debug.Log("Attack State Entered");
-            timeElapsed = 0;
+            hasDealtDamage = false;
             PlayerStateMachine.PlayerCharacter.Animator.SetBool(IsAttacking, true);
+            timeElapsed = 0;
             Attack();
         }
 
         public override void Tick(float deltaTime)
         {
             // Add logic for attacking
-            //Debug.Log("Attack State Tick");
-
             timeElapsed += deltaTime;
 
             if (timeElapsed >= attackDuration)
@@ -47,36 +46,48 @@ namespace RPGMechanics.StateMachines.Player
 
         public override void Exit()
         {
-            // Debug.Log("Attack State Exit");
             PlayerStateMachine.PlayerCharacter.InputReader.IsAttacking = false;
             PlayerStateMachine.PlayerCharacter.Animator.SetBool(IsAttacking, false);
         }
 
         public void Attack()
         {
+            if (hasDealtDamage) return;
+
             Weapon currentWeapon = PlayerStateMachine.PlayerCharacter.CurrentWeapon;
-            Transform attackOrigin = currentWeapon.transform;
-            Vector3 direction = attackOrigin.forward;
+            Transform playerTransform = PlayerStateMachine.PlayerCharacter.transform;
+            Vector3 direction = playerTransform.forward;
+            Vector3 origin = currentWeapon.transform.position + (direction * currentWeapon.Range);
 
-            var success = Physics.SphereCast(attackOrigin.position, currentWeapon.Radius, direction, out hit,
+            origin.y = 1.5f;
+            Debug.DrawRay(origin,direction, Color.cyan, 1f);
+                
+            var success = Physics.SphereCast(
+                origin,
+                currentWeapon.Radius,
+                direction,
+                out hit,
                 currentWeapon.Range,
-                hitLayerMask);
-
-            Debug.Log("Draw Now");
-
-            DebugDrawManager.Instance?.DrawWireSphere(
-                attackOrigin.position,
-                PlayerStateMachine.PlayerCharacter.CurrentWeapon.Radius,
-                Color.red
+                hitLayerMask
             );
+
 
             if (!success) { return; }
 
-            Debug.Log($"Hit: {hit.collider.name}");
+            DebugDrawManager.Instance?.DrawWireSphere(
+                origin,
+                currentWeapon.Radius,
+                Color.red
+            );
+            
+            Debug.Log("Running");
+
             var enemy = hit.collider.GetComponent<Characters.Enemies.Enemy>();
             if (enemy)
             {
-                enemy.TakeDamage(currentWeapon.Damage);
+                var remainingHealth = enemy.TakeDamage(currentWeapon.Damage);
+                Debug.Log(remainingHealth);
+                hasDealtDamage = true;
             }
         }
     }
