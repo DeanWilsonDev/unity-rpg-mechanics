@@ -67,3 +67,4 @@ ProjectSettings/TagManager.asset
 # External Packages and Assets #
 # ============================ #
 Assets/Packages/*
+Assets/Resources/*

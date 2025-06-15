@@ -1,5 +1,7 @@
 using System;
 
+using RPGMechanics.Inventory;
+
 using UnityEngine;
 
 
@@ -8,7 +10,7 @@ namespace RPGMechanics.Characters.Enemies
     public class Enemy : Character
     {
         [field: SerializeField] public EnemyInventory EnemyInventory { get; private set; }
-        public override Inventory Inventory => EnemyInventory;
+        public override Inventory.Inventory Inventory => EnemyInventory;
 
         public void OnDeath()
         {

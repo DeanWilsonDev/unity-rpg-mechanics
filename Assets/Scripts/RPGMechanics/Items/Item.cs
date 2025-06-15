@@ -15,7 +15,7 @@ namespace RPGMechanics.Items
         Unknown
     }
 
-    public class Item
+    public class Item: MonoBehaviour
     {
         [SerializeField] private string description;
         [SerializeField] private int level;

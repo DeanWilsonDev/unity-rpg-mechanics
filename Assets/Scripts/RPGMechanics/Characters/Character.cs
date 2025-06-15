@@ -5,6 +5,18 @@ using UnityEngine;
 
 namespace RPGMechanics.Characters
 {
+    public class CharacterInitializer
+    {
+        public CharacterStatistics Statistics { get; set; }
+        public string CharacterName { get; set; }
+        public CharacterType CharacterType { get; set; }
+        public Health CharacterHealth { get; set; }
+        public Transform WeaponSlot { get; set; }
+        public Inventory.Inventory Inventory { get; set; }
+        public Animator Animator { get; set; }
+        public Weapon CurrentWeapon { get; set; }
+    }
+    
     [RequireComponent(typeof(Health))]
     public abstract class Character : MonoBehaviour, IDamagable
     {
@@ -24,7 +36,7 @@ namespace RPGMechanics.Characters
 
         [field: SerializeField] protected internal Transform WeaponSlot { get; set; }
 
-        public abstract Inventory Inventory { get; }
+        public abstract Inventory.Inventory Inventory { get; protected set; }
 
         protected void Awake()
         {
@@ -42,6 +54,19 @@ namespace RPGMechanics.Characters
                 CurrentWeapon.transform.parent = WeaponSlot.transform;
                 CurrentWeapon.transform.localPosition = WeaponSlot.transform.localPosition;
             }
+        }
+
+        public virtual Character InitializeCharacter(CharacterInitializer initializer)
+        {
+            this.statistics = initializer.Statistics;
+            this.characterName = initializer.CharacterName;
+            this.characterType = initializer.CharacterType;
+            this.Animator = initializer.Animator;
+            this.WeaponSlot = initializer.WeaponSlot;
+            this.CharacterHealth = initializer.CharacterHealth;
+            this.CurrentWeapon = initializer.CurrentWeapon;
+            this.Inventory = initializer.Inventory;
+            return this;
         }
 
         public virtual float TakeDamage(float damage)

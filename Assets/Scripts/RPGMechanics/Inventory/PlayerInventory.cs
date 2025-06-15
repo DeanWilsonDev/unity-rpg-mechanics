@@ -1,6 +1,7 @@
+using RPGMechanics.Characters;
 using RPGMechanics.Items;
 
-namespace RPGMechanics.Characters.Player
+namespace RPGMechanics.Inventory
 {
     public class PlayerInventory : Inventory
     {

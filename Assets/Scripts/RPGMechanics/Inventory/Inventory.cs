@@ -1,17 +1,19 @@
 using System.Collections.Generic;
 using RPGMechanics.Items;
 
-namespace RPGMechanics.Characters
+using UnityEngine;
+
+namespace RPGMechanics.Inventory
 {
-    public abstract class Inventory
+    public abstract class Inventory: MonoBehaviour
     {
-        protected List<Item> Items = new();
+        [field: SerializeField] protected List<Item> Items { get; set; } = new();
 
         /// <summary>
         ///     Helper method to get all items in the inventory.
         /// </summary>
         /// <returns></returns>
-        public List<Item> GetItems()
+        public virtual List<Item> GetItems()
         {
             return Items;
         }
@@ -20,7 +22,7 @@ namespace RPGMechanics.Characters
         ///     Helper method to add an item to the inventory.
         /// </summary>
         /// <param name="item"></param>
-        public void AddItemToInventory(Item item)
+        public virtual void AddItemToInventory(Item item)
         {
             Items.Add(item);
         }
@@ -29,7 +31,7 @@ namespace RPGMechanics.Characters
         ///     Helper method to remove an item from the inventory.
         /// </summary>
         /// <param name="item"></param>
-        public void RemoveItemFromInventory(Item item)
+        public virtual void RemoveItemFromInventory(Item item)
         {
             Items.Remove(item);
         }

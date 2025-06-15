@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace RPGMechanics.Characters.Enemies
+namespace RPGMechanics.Inventory
 {
     public class EnemyInventory : Inventory
     {
