@@ -1,6 +1,7 @@
 using RPGMechanics.Characters;
 using RPGMechanics.Characters.Player;
 using RPGMechanics.Characters.Statistics;
+using RPGMechanics.Input;
 
 using Unity.VisualScripting;
 
@@ -21,9 +22,6 @@ namespace RPGMechanics.SceneBuilding
 
             var controller = go.AddComponent<CharacterController>();
 
-
-
-
             go.tag = "Player";
             go.layer = PLAYER_LAYER;
         }
@@ -33,7 +31,7 @@ namespace RPGMechanics.SceneBuilding
             var health = go.AddComponent<Health>();
             health.Initialize(stats);
             return health;
-        } 
+        }
 
         private static PlayerCharacter AddPlayerCharacter(GameObject go)
         {
@@ -42,7 +40,9 @@ namespace RPGMechanics.SceneBuilding
             const CharacterType characterType = CharacterType.MeleeDamage;
             var stats = CharacterStatistics.GetBaseStatisticsForCharacterType(characterType);
             var health = AddHealth(go, stats);
-            var animator = AddAnimator(go); 
+            var animator = AddAnimator(go);
+            var inputReader = AddInputReader(go);
+            var characterController = AddCharacterController(go);
 
             var initializer = new PlayerCharacterInitializer
             {
@@ -55,8 +55,8 @@ namespace RPGMechanics.SceneBuilding
                 Animator = animator,
                 CurrentWeapon = null,
                 PlayerInventory = null,
-                InputReader = null,
-                CharacterController = null
+                InputReader = inputReader,
+                CharacterController = characterController 
             };
 
             player.InitializeCharacter(initializer);
@@ -93,8 +93,26 @@ namespace RPGMechanics.SceneBuilding
         {
             var animator = go.AddComponent<Animator>();
             // Set Properties
-            
+
+
             return animator;
+        }
+
+        private static InputReader AddInputReader(GameObject go)
+        {
+            var inputReader = go.AddComponent<InputReader>();
+            // Set Properties
+
+
+            return inputReader;
+        }
+
+        private static CharacterController AddCharacterController(GameObject go)
+        {
+            var characterController = go.AddComponent<CharacterController>();
+            // Set Properties
+
+            return characterController;
         }
     }
 }

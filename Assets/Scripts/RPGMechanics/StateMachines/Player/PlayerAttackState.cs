@@ -1,5 +1,5 @@
 using RPGMechanics.Debugging;
-using RPGMechanics.Weapons;
+using RPGMechanics.Items;
 
 using UnityEngine;
 

@@ -1,5 +1,5 @@
 using RPGMechanics.Characters.Statistics;
-using RPGMechanics.Weapons;
+using RPGMechanics.Items;
 
 using UnityEngine;
 
@@ -56,7 +56,7 @@ namespace RPGMechanics.Characters
             }
         }
 
-        public virtual Character InitializeCharacter(CharacterInitializer initializer)
+        public Character InitializeCharacter(CharacterInitializer initializer)
         {
             this.statistics = initializer.Statistics;
             this.characterName = initializer.CharacterName;
